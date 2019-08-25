@@ -1,16 +1,19 @@
 console.log("Before");
-getUser(1, user => {
-  console.log(user);
-  getRepo(user.gitHubUsername, repos => {
-    console.log(repos);
-    getCommits(repos, commits => {
-      console.log(commits);
-      //This is called callback hell - because it has nested callbacks
-    });
-  });
-});
+getUser(1, getRepositories); // Call back hell resolved using Named functions
 
 console.log("After");
+
+function getRepositories(user) {
+  getRepo(user.gitHubUsername, fetchCommits);
+}
+
+function fetchCommits(repos) {
+  getCommits(repos, displayCommits);
+}
+
+function displayCommits(commits) {
+  console.log(commits);
+}
 
 function getUser(id, callback) {
   setTimeout(() => {
