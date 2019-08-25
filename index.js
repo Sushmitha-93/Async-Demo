@@ -4,7 +4,8 @@ getUser(1, user => {
   getRepo(user.gitHubUsername, repos => {
     console.log(repos);
     getCommits(repos, commits => {
-      //Callback hell
+      console.log(commits);
+      //This is called callback hell - because it has nested callbacks
     });
   });
 });
@@ -23,4 +24,11 @@ function getRepo(username, callback) {
     console.log("Getting repositories..");
     callback(["repo1", "repo2", "repo3"]);
   }, 2000);
+}
+
+function getCommits(repos, callback) {
+  setTimeout(() => {
+    console.log("Getting commits..");
+    callback([3, 4, 1]);
+  }, 1000);
 }
